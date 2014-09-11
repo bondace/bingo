@@ -163,6 +163,7 @@
         Value_k = new Array();
         count++;
         SaveStorage();
+		CheckBingo();
       }
 
           var Yokocount =0;
@@ -254,6 +255,9 @@
 				if(reach){
 					$('#display').append((i + 1) + '番目のカードに<span style="color:orange; font-weight:bold;">リーチ</span>が' + reach + '個' + 'あります。<br>');
 				}
+			}
+			if(!($('#display span').length)){
+				$('#display').append('ビンゴ・リーチはありません。<br>');
 			}
 		}
 

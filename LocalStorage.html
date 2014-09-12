@@ -49,9 +49,9 @@
         $('#list').append('<tr>');
         for(var j = 0; j < 10/* ←列数 */ && i < storage.length; i++, j++){
           var _key = storage.key(i);
-		  if(!(isNaN(_key))){
+          if(!(isNaN(_key))){
             $('#list:last').append('<td style="width:40px; text-align:right;">' + _key + '</td>');
-		  }
+          }
         }
         $('#list').append('</tr>');
       }
@@ -63,9 +63,9 @@
         $('#list').append('<tr>');
         for(var j = 0; j < 10/* ←列数 */ && i < localStorage.length; i++, j++){
           var _key = localStorage.key(i);
-		  if(!(isNaN(_key))){
+          if(!(isNaN(_key))){
             $('#list:last').append('<td style="width:40px; text-align:right;">' + _key + '</td>');
-		  }
+          }
         }
         $('#list').append('</tr>');
       }

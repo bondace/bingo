@@ -44,28 +44,32 @@
     }
 
     function viewStorage(){
-		$('#list').empty();
-		for(var i = 0; i < storage.length; ){
-			$('#list').append('<tr>');
-			for(var j = 0; j < 10/* ←列数 */ && i < storage.length; i++, j++){
-				var _key = storage.key(i);
-				$('#list:last').append('<td style="width:40px; text-align:right;">' + _key + '</td>');
-			}
-			$('#list').append('</tr>');
-		}
-	}
-
-	function load(){
-		$('#list').empty();
-		for(var i = 0; i < localStorage.length; ){
-			$('#list').append('<tr>');
-			for(var j = 0; j < 10/* ←列数 */ && i < localStorage.length; i++, j++){
-				var _key = localStorage.key(i);
-				$('#list:last').append('<td style="width:40px; text-align:right;">' + _key + '</td>');
-			}
-			$('#list').append('</tr>');
-		}
-	}
+      $('#list').empty();
+      for(var i = 0; i < storage.length-1; ){
+        $('#list').append('<tr>');
+        for(var j = 0; j < 10/* ←列数 */ && i < storage.length; i++, j++){
+          var _key = storage.key(i);
+		  if(!(isNaN(_key))){
+            $('#list:last').append('<td style="width:40px; text-align:right;">' + _key + '</td>');
+		  }
+        }
+        $('#list').append('</tr>');
+      }
+    }
+ 
+    function load(){
+      $('#list').empty();
+      for(var i = 0; i < localStorage.length; ){
+        $('#list').append('<tr>');
+        for(var j = 0; j < 10/* ←列数 */ && i < localStorage.length; i++, j++){
+          var _key = localStorage.key(i);
+		  if(!(isNaN(_key))){
+            $('#list:last').append('<td style="width:40px; text-align:right;">' + _key + '</td>');
+		  }
+        }
+        $('#list').append('</tr>');
+      }
+    }
 
     var img = new Array();
     var id1;
@@ -104,7 +108,7 @@
       }
       
       canvas.width = 500;
-      canvas.height= 180*( (id2-id1)%3+1);
+      canvas.height= 180*( (id2-id1)/3+1);
    
       ctx.font = "20px 'ＭＳ Ｐゴシック'";
       for(var i=0; i<=id2-id1; i++){
@@ -113,7 +117,7 @@
           var intData = [
                       [0,0,0,0,0,id1+i],
                       [0,0,0,0,0,0],
-                      [0,0,0,0,0,0],
+                      [0,0,100,0,0,0],
                       [0,0,0,0,0,0],
                       [0,0,0,0,0,0],
               ];
@@ -140,6 +144,9 @@
                 for(var j=0; j<5; j++){
                   for(var k=0; k<5; k++){
                     var num =Card[i].data[j][k];
+                    if(num == 100){
+                      num-=100;
+                    }
                      ctx.drawImage(img[num],(50)+k*(250)+(130*10+100)*(i%3),(100+230)+j*(100+110)+Math.floor(i/3)*(170*10+100));
                   }
                 }
@@ -183,6 +190,8 @@
           storage.setItem(key, json_value);
           alert("ID"+key+"番のカードを登録しました。")
         }
+        var history = new Array();
+        storage.setItem("history",JSON.stringify(history));
     }
 
     </script>
@@ -206,14 +215,13 @@
          <a href="#" id="delete" data-role="button" data-inline="true">削除</a>
          <a href="#" id="alldelete" data-role="button" data-inline="true">全て削除</a></p>
         </form>
-        <h4>入力履歴</h4>
+      <h4>入力履歴</h4>
         <table class="tagForList2">
-          <thead>
-            <tr>
-              <th>ID</th>
-            </tr>
-          </thead>
-          <tbody id="list"></tbody>
+        <tr>
+        <th>ID </th>
+        </tr>
+        <tbody id="list">
+        </tbody>
         </table>
       </div>
 

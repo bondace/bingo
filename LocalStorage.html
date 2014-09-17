@@ -49,7 +49,7 @@
     /* 変更 */
     function viewStorage(){
       var _key = [];
-      var rows = $(window).width() / 40;
+      var rows = parseInt($(window).width() / 40); //←修正
       $('#list').empty();
       for(var i = 0; i < storage.length - 1; i++){
         _key.push(storage.key(i));
@@ -66,7 +66,7 @@
  
     function load(){
       var _key = [];
-      var rows = $(window).width() / 40;
+      var rows = parseInt($(window).width() / 40); //←修正
       $('#list').empty();
       for(var i = 0; i < localStorage.length - 1; i++){
         _key.push(localStorage.key(i));
